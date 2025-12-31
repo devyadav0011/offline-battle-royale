@@ -99,6 +99,48 @@ export default function Play() {
       gameState.players.forEach((player) => {
         if (!player.isAlive) return;
 
+        // Draw indicator light above player
+        const lightY = player.position.y - GAME_CONFIG.PLAYER_SIZE / 2 - 25;
+        const lightRadius = 5;
+
+        // Light glow
+        const gradient = ctx.createRadialGradient(
+          player.position.x,
+          lightY,
+          0,
+          player.position.x,
+          lightY,
+          lightRadius * 2,
+        );
+
+        if (player.isPlayer) {
+          gradient.addColorStop(0, "rgba(48, 164, 108, 0.8)");
+          gradient.addColorStop(0.5, "rgba(48, 164, 108, 0.4)");
+          gradient.addColorStop(1, "rgba(48, 164, 108, 0)");
+        } else {
+          gradient.addColorStop(0, "rgba(229, 72, 77, 0.8)");
+          gradient.addColorStop(0.5, "rgba(229, 72, 77, 0.4)");
+          gradient.addColorStop(1, "rgba(229, 72, 77, 0)");
+        }
+
+        ctx.beginPath();
+        ctx.arc(player.position.x, lightY, lightRadius * 2, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // Light core
+        ctx.beginPath();
+        ctx.arc(player.position.x, lightY, lightRadius, 0, Math.PI * 2);
+        ctx.fillStyle = player.isPlayer ? "#30a46c" : "#e5484d";
+        ctx.fill();
+
+        // Light shine
+        ctx.beginPath();
+        ctx.arc(player.position.x - 1.5, lightY - 1.5, lightRadius * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.fill();
+
+        // Draw player circle
         ctx.beginPath();
         ctx.arc(player.position.x, player.position.y, GAME_CONFIG.PLAYER_SIZE / 2, 0, Math.PI * 2);
 
