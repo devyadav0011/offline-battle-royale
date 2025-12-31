@@ -140,17 +140,52 @@ export default function Play() {
         ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
         ctx.fill();
 
-        // Draw player circle
-        ctx.beginPath();
-        ctx.arc(player.position.x, player.position.y, GAME_CONFIG.PLAYER_SIZE / 2, 0, Math.PI * 2);
-
+        // Draw player character
         if (player.isPlayer) {
-          ctx.fillStyle = "#30a46c";
-          ctx.fill();
-          ctx.strokeStyle = "#3dd68c";
-          ctx.lineWidth = 3;
-          ctx.stroke();
+          // Minecraft-style player character
+          const centerX = player.position.x;
+          const centerY = player.position.y;
+          const scale = GAME_CONFIG.PLAYER_SIZE / 32; // Scale to fit player size
+
+          // Head (larger cube)
+          ctx.fillStyle = "#d4a574"; // Skin tone
+          ctx.fillRect(centerX - 8 * scale, centerY - 12 * scale, 16 * scale, 16 * scale);
+
+          // Head outline
+          ctx.strokeStyle = "#8b6f47";
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(centerX - 8 * scale, centerY - 12 * scale, 16 * scale, 16 * scale);
+
+          // Hair/helmet overlay
+          ctx.fillStyle = "#4a3c28";
+          ctx.fillRect(centerX - 8 * scale, centerY - 12 * scale, 16 * scale, 6 * scale);
+
+          // Eyes
+          ctx.fillStyle = "#3e63dd";
+          ctx.fillRect(centerX - 5 * scale, centerY - 6 * scale, 3 * scale, 3 * scale);
+          ctx.fillRect(centerX + 2 * scale, centerY - 6 * scale, 3 * scale, 3 * scale);
+
+          // Body (torso)
+          ctx.fillStyle = "#3e63dd"; // Blue shirt
+          ctx.fillRect(centerX - 6 * scale, centerY + 4 * scale, 12 * scale, 10 * scale);
+
+          // Body outline
+          ctx.strokeStyle = "#2d4aa7";
+          ctx.strokeRect(centerX - 6 * scale, centerY + 4 * scale, 12 * scale, 10 * scale);
+
+          // Arms
+          ctx.fillStyle = "#d4a574"; // Skin tone for arms
+          ctx.fillRect(centerX - 10 * scale, centerY + 5 * scale, 4 * scale, 8 * scale); // Left arm
+          ctx.fillRect(centerX + 6 * scale, centerY + 5 * scale, 4 * scale, 8 * scale); // Right arm
+
+          // Legs
+          ctx.fillStyle = "#2d4aa7"; // Dark blue pants
+          ctx.fillRect(centerX - 4 * scale, centerY + 14 * scale, 4 * scale, 6 * scale); // Left leg
+          ctx.fillRect(centerX, centerY + 14 * scale, 4 * scale, 6 * scale); // Right leg
         } else {
+          // Draw enemy bots as circles (original style)
+          ctx.beginPath();
+          ctx.arc(player.position.x, player.position.y, GAME_CONFIG.PLAYER_SIZE / 2, 0, Math.PI * 2);
           ctx.fillStyle = "#e5484d";
           ctx.fill();
           ctx.strokeStyle = "#ff8a88";
