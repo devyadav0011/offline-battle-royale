@@ -1,147 +1,163 @@
 .container {
   min-height: 100vh;
-  background: var(--color-neutral-2);
+  background: #0d0f0a;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: var(--space-4);
-  position: relative;
 }
 
 .gameWrapper {
   position: relative;
-  max-width: 900px;
-  width: 100%;
+  width: min(900px, 100%);
 }
 
 .canvas {
   width: 100%;
   height: auto;
   aspect-ratio: 1;
-  border: 2px solid var(--color-accent-8);
+  border: 2px solid rgba(110, 143, 255, 0.4);
   border-radius: var(--radius-3);
-  box-shadow: var(--shadow-4);
-  background: var(--color-neutral-1);
+  box-shadow: 0 0 40px rgba(62, 99, 221, 0.3), 0 20px 60px rgba(0, 0, 0, 0.8);
   cursor: crosshair;
+  display: block;
 }
 
 .uiOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   pointer-events: none;
-  padding: var(--space-4);
+  padding: var(--space-3);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.topBar {
+/* === TOP HUD === */
+.topHud {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-4);
+  gap: var(--space-2);
+  justify-content: center;
 }
 
 .statCard {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  padding: var(--space-3) var(--space-4);
+  background: rgba(10, 12, 8, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(110, 143, 255, 0.25);
   border-radius: var(--radius-2);
-  border: 1px solid var(--color-accent-7);
-  color: white;
-  min-width: 120px;
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 90px;
 }
 
 .statLabel {
-  font: var(--font-caption);
-  color: var(--color-neutral-9);
-  margin: 0 0 var(--space-1);
+  font-size: 10px;
+  font-weight: 600;
   text-transform: uppercase;
-  font-size: var(--font-size-0);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .statValue {
-  font: var(--font-heading);
-  margin: 0;
   font-size: var(--font-size-4);
-  color: white;
+  font-weight: 700;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1;
 }
 
-.healthBar {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  padding: var(--space-3) var(--space-4);
+/* === BOTTOM HUD === */
+.bottomHud {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.healthPanel {
+  background: rgba(10, 12, 8, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(110, 143, 255, 0.25);
   border-radius: var(--radius-2);
-  border: 1px solid var(--color-accent-7);
+  padding: var(--space-3) var(--space-4);
   min-width: 200px;
 }
 
-.healthLabel {
-  font: var(--font-caption);
-  color: var(--color-neutral-9);
-  margin: 0 0 var(--space-2);
-  text-transform: uppercase;
-  font-size: var(--font-size-0);
-  letter-spacing: 0.05em;
+.healthHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: var(--space-2);
 }
 
-.healthBarTrack {
-  height: 12px;
-  background: var(--color-neutral-8);
-  border-radius: var(--radius-2);
+.healthLabel {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.healthValue {
+  font-size: var(--font-size-1);
+  font-weight: 700;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+}
+
+.healthTrack {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
   overflow: hidden;
-  position: relative;
 }
 
-.healthBarFill {
+.healthFill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-success-9), var(--color-success-10));
-  transition:
-    width 0.3s var(--ease-out),
-    background 0.3s var(--ease-out);
-  border-radius: var(--radius-2);
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  border-radius: 999px;
+  transition: width 0.25s ease-out, background 0.3s ease-out;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
 }
 
-.healthBarFill.low {
-  background: linear-gradient(90deg, var(--color-error-9), var(--color-error-10));
+.healthFill.warning {
+  background: linear-gradient(90deg, #ea580c, #fb923c);
+  box-shadow: 0 0 8px rgba(234, 88, 12, 0.6);
 }
 
-.healthBarFill.medium {
-  background: linear-gradient(90deg, var(--color-interactive-9), var(--color-interactive-10));
+.healthFill.critical {
+  background: linear-gradient(90deg, #dc2626, #f87171);
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.8);
+  animation: pulse-red 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-red {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
 }
 
 .controls {
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  padding: var(--space-3) var(--space-4);
+  background: rgba(10, 12, 8, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(110, 143, 255, 0.25);
   border-radius: var(--radius-2);
-  border: 1px solid var(--color-accent-7);
-  color: white;
-  font: var(--font-caption);
-  max-width: 300px;
+  padding: var(--space-3) var(--space-4);
 }
 
 .controlsTitle {
   margin: 0 0 var(--space-2);
-  font-weight: 600;
-  color: var(--color-interactive-9);
+  font-size: 10px;
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: var(--font-size-0);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  color: rgba(255, 170, 0, 0.8);
 }
 
 .controlsList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -151,28 +167,40 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: var(--font-size-0);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
 }
 
-.controlKey {
-  background: var(--color-neutral-8);
-  padding: 2px var(--space-2);
+.key {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-1);
+  padding: 2px 8px;
+  font-family: monospace;
+  font-size: 11px;
   font-weight: 600;
-  min-width: 60px;
+  color: rgba(255, 255, 255, 0.85);
+  min-width: 52px;
   text-align: center;
-  font-family: var(--font-monospace-code);
 }
 
-@media (max-width: 768px) {
-  .topBar {
-    flex-direction: column;
+@media (max-width: 600px) {
+  .topHud {
+    gap: var(--space-1);
   }
 
-  .statCard,
-  .healthBar,
+  .statCard {
+    min-width: 60px;
+    padding: var(--space-2);
+  }
+
+  .bottomHud {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .healthPanel,
   .controls {
-    min-width: auto;
-    width: 100%;
+    min-width: unset;
   }
 }
