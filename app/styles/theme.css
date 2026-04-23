@@ -7,7 +7,6 @@ html {
   --font-caption: var(--font-size-fluid-0) "Inter", var(--font-system-ui);
   --font-code: var(--font-size-fluid-0) var(--font-monospace-code);
 }
-
 html {
   /* Neutral colors */
   --color-neutral-1: var(--slate-1);
@@ -24,7 +23,6 @@ html {
   --color-neutral-12: var(--slate-12);
   --color-neutral-contrast: var(--slate-contrast);
 
-  /* Accent colors - Electric Blue */
   --color-accent-1: var(--indigo-1);
   --color-accent-2: var(--indigo-2);
   --color-accent-3: var(--indigo-3);
@@ -39,7 +37,6 @@ html {
   --color-accent-12: var(--indigo-12);
   --color-accent-contrast: var(--indigo-contrast);
 
-  /* Error colors */
   --color-error-1: var(--red-1);
   --color-error-2: var(--red-2);
   --color-error-3: var(--red-3);
