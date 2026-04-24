@@ -10,6 +10,7 @@ A modern, production-ready template for building full-stack React applications u
 - 🔄 Data loading and mutations
 - 🔒 TypeScript by default
 - 🎉 CSS Modules for styling
+- 
 - 📖 [React Router docs](https://reactrouter.com/)
 
 ### Styling & Theming
