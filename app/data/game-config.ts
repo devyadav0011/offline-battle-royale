@@ -19,3 +19,4 @@ export const GAME_CONFIG = {
 } as const;
 
 export type GameConfig = typeof GAME_CONFIG;
+
